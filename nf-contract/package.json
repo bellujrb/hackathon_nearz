@@ -1,0 +1,31 @@
+{
+  "scripts": {
+    "debug": "nodemon web3/contract.ts",
+    "app": "node dist/web3/contract.js",
+    "dev": "ts-node ./web3/contract.ts",
+    "build:compile": "npx babel src --extensions .ts --out-dir dist --source-maps",
+    "build:types": "tsc",
+    "start": "npm run build:compile && npm run app",
+    "build": "npm run build:compile"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/node": "^7.17.10",
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-proposal-decorators": "^7.17.12",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/node": "^16.11.10",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "concurrently": "^6.2.1",
+    "dotenv": "^16.3.2",
+    "nodemon": "^3.1.0",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.7.4",
+    "web3": "^4.6.0",
+    "web3-utils": "^4.2.1"
+  }
+}
