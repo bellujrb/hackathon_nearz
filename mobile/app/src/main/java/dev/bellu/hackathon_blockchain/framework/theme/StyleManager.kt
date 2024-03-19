@@ -13,6 +13,12 @@ val defaultFontFamilly = FontFamily(
     Font(dev.bellu.hackathon_blockchain.R.font.chakra_petch_bold, FontWeight.Bold),
 )
 object TextManager{
+    val smallWhite = TextStyle(
+        fontFamily = defaultFontFamilly,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = Colors.white
+    )
     val smallBlack = TextStyle(
         fontFamily = defaultFontFamilly,
         fontSize = 16.sp,

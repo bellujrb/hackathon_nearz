@@ -2,6 +2,7 @@ package dev.bellu.hackathon_blockchain.framework.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import dev.bellu.hackathon_blockchain.R
+import dev.bellu.hackathon_blockchain.framework.composables.ButtonSample
 import dev.bellu.hackathon_blockchain.framework.theme.Colors
 import dev.bellu.hackathon_blockchain.framework.theme.TextManager
+import dev.bellu.hackathon_blockchain.navigation.Screens
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(navController: NavController){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp),
@@ -55,7 +59,10 @@ fun HomeScreen(){
                 modifier = Modifier
                     .height(190.dp)
                     .fillMaxWidth(1.0f)
-                    .background(color = Colors.white30),
+                    .background(color = Colors.white30)
+                    .clickable {
+                        navController.navigate("issuance")
+                    },
                 content = {
                     Column(
                         verticalArrangement = Arrangement.SpaceBetween,
@@ -135,7 +142,6 @@ fun HomeScreen(){
                         }
                     )
                 },
-            )
-        }
+            )}
     )
 }
