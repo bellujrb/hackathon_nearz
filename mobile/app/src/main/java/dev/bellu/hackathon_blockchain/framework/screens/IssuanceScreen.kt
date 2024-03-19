@@ -25,11 +25,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun IssuanceScreen(navController: NavController){
 
-    LaunchedEffect(key1 = null){
-        delay(3000)
-        navController.navigate("success")
-    }
-
     LazyColumn(
         modifier = Modifier
             .padding(16.dp)
