@@ -1,23 +1,33 @@
 package dev.bellu.hackathon_blockchain.framework.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.bellu.hackathon_blockchain.R
+import dev.bellu.hackathon_blockchain.framework.theme.Colors
+import dev.bellu.hackathon_blockchain.framework.theme.TextManager
 
 @Composable
 fun HomeScreen(){
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(16.dp),
         content = {
             Box(
                 contentAlignment = Alignment.Center,
@@ -34,16 +44,97 @@ fun HomeScreen(){
                     )
                 },
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "Como deseja emitir a nota fiscal?",
+                style = TextManager.bigBlack,
+                textAlign = TextAlign.Center
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Box(
-                content = {
-
-                },
                 modifier = Modifier
-                    .height(439.dp)
-                    .fillMaxWidth(0.8f)
+                    .height(190.dp)
+                    .fillMaxWidth(1.0f)
+                    .background(color = Colors.white30),
+                content = {
+                    Column(
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        content = {
+                            Column(
+                                modifier = Modifier
+                                    .padding(12.dp)
+                            ) {
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .size(56.dp)
+                                        .background(color = Colors.white),
+                                    content = {}
+                                )
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Text(
+                                    text = "Inputs Manual",
+                                    style = TextManager.smallBlack
+                                )
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Text(
+                                    text = "Inserir por input para que a nota fiscal fosse emitida e adicionada no blockchain",
+                                    style = TextManager.smallGray
+                                )
+                            }
+                            Box(modifier = Modifier
+                                .height(2.dp)
+                                .fillMaxWidth()
+                                .background(color = Colors.primary)
+                            )
+                        }
+                    )
+                },
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Box(
+                modifier = Modifier
+                    .height(230.dp)
+                    .fillMaxWidth(1.0f)
+                    .background(color = Colors.white30),
+                content = {
+                    Column(
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        content = {
+                            Column(
+                                modifier = Modifier
+                                    .padding(12.dp)
+                            ) {
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .size(56.dp)
+                                        .background(color = Colors.white),
+                                    content = {}
+                                )
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Text(
+                                    text = "Integração automática",
+                                    style = TextManager.smallBlack
+                                )
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Text(
+                                    text = "With our own API in our premium plan, you can integrate it with your system automatically and instantly as soon as the user issues the invoice on your platform",
+                                    style = TextManager.smallGray
+                                )
+                            }
+                            Box(modifier = Modifier
+                                .height(2.dp)
+                                .fillMaxWidth()
+                                .background(color = Colors.primary)
+                            )
+                        }
+                    )
+                },
             )
         }
     )
