@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,9 +20,16 @@ import dev.bellu.hackathon_blockchain.framework.composables.ButtonSample
 import dev.bellu.hackathon_blockchain.framework.composables.InputSample
 import dev.bellu.hackathon_blockchain.framework.theme.Colors
 import dev.bellu.hackathon_blockchain.navigation.Screens
+import kotlinx.coroutines.delay
 
 @Composable
 fun IssuanceScreen(navController: NavController){
+
+    LaunchedEffect(key1 = null){
+        delay(3000)
+        navController.navigate("success")
+    }
+
     LazyColumn(
         modifier = Modifier
             .padding(16.dp)
@@ -36,12 +44,12 @@ fun IssuanceScreen(navController: NavController){
             )
             Spacer(modifier = Modifier.height(10.dp))
             InputSample(
-                label = "Endereço do Pagador",
-                placeholder = "Example: Aven Paulista...",
+                label = "Endereço HEX",
+                placeholder = "Example: 0x4a3f9A1BcE78E39b0...",
             )
             InputSample(
-                label = "Endereço do Beneficiario a Pagar da Fatura",
-                placeholder = "Example: Aven Paulista...",
+                label = "Endereço Wallet",
+                placeholder = "Example: 1Hw6vKeBTK9nS...",
             )
             InputSample(
                 label = "Numero da Fatura",
@@ -74,7 +82,9 @@ fun IssuanceScreen(navController: NavController){
             ButtonSample(
                 title = "Emitir",
                 backgroundColor = Colors.primary,
-                onClick = {}
+                onClick = {
+                    navController.navigate("success")
+                }
             )
         }
     }

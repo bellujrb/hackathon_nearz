@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.bellu.hackathon_blockchain.framework.screens.HomeScreen
 import dev.bellu.hackathon_blockchain.framework.screens.IssuanceScreen
+import dev.bellu.hackathon_blockchain.framework.screens.SuccessScreen
 import dev.bellu.hackathon_blockchain.navigation.Screens
 
 
@@ -19,6 +20,7 @@ fun AppNavigation(
         builder = {
             composable(Screens.Home.route) { HomeScreen(navController) }
             composable(Screens.Issuance.route) { IssuanceScreen(navController) }
+            composable(Screens.Success.route) { SuccessScreen(navController)}
         }
     )
 }

@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,8 +47,8 @@ fun HomeScreen(navController: NavController){
                     Image(
                         painter = painterResource(id = R.drawable.logo),
                         modifier = Modifier
-                            .height(80.dp)
-                            .width(82.04.dp),
+                            .height(46.dp)
+                            .width(184.4.dp),
                         contentDescription = "Logo"
                     )
                 },
@@ -78,7 +83,14 @@ fun HomeScreen(navController: NavController){
                                     modifier = Modifier
                                         .size(56.dp)
                                         .background(color = Colors.white),
-                                    content = {}
+                                    content = {
+                                        Icon(
+                                            modifier = Modifier
+                                                .size(24.dp),
+                                            imageVector = Icons.Default.Edit,
+                                            contentDescription = null
+                                        )
+                                    }
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
@@ -103,7 +115,7 @@ fun HomeScreen(navController: NavController){
             Spacer(modifier = Modifier.height(10.dp))
             Box(
                 modifier = Modifier
-                    .height(230.dp)
+                    .height(250.dp)
                     .fillMaxWidth(1.0f)
                     .background(color = Colors.white30),
                 content = {
@@ -121,7 +133,14 @@ fun HomeScreen(navController: NavController){
                                     modifier = Modifier
                                         .size(56.dp)
                                         .background(color = Colors.white),
-                                    content = {}
+                                    content = {
+                                        Icon(
+                                            modifier = Modifier
+                                                .size(24.dp),
+                                            imageVector = Icons.Default.Build,
+                                            contentDescription = null
+                                        )
+                                    }
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
@@ -130,7 +149,7 @@ fun HomeScreen(navController: NavController){
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
-                                    text = "With our own API in our premium plan, you can integrate it with your system automatically and instantly as soon as the user issues the invoice on your platform",
+                                    text = "Com API própria em nosso plano premium, você pode integrá-la ao seu sistema de forma automática e instantânea assim que o usuário emitir a nota fiscal em sua plataforma\n",
                                     style = TextManager.smallGray
                                 )
                             }
