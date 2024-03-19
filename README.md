@@ -1,4 +1,4 @@
-> _HACKATHON_NEARZ: ChainReceive
+> _HACKATHON_NEARX: TrackPay
 
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 ![Platform](https://img.shields.io/badge/Platform-CrossPlatform-blue)
