@@ -9,8 +9,8 @@ contract InvoiceTest is Test {
 
     function setUp() public {
         invoice = new Invoice();
-        address payable payer = payable(address(0x1)); // Example payer address
-        address payable payee = payable(address(0x2)); // Example payee address
+        address payable payer = payable(address(0x1));
+        address payable payee = payable(address(0x2));
         uint256 invoiceNumber = 123;
         string memory invoiceDate = "2024-03-16";
         string[] memory itemDescriptions = new string[](2);
@@ -22,8 +22,8 @@ contract InvoiceTest is Test {
         uint256[] memory unitPrices = new uint256[](2);
         unitPrices[0] = 100;
         unitPrices[1] = 200;
-        uint256 total = 500; // Example total
-        uint256 tax = 50; // Example tax
+        uint256 total = 500;
+        uint256 tax = 50;
         uint256 paymentDocumentNumber = 67890;
 
         invoice.setInvoiceData(
@@ -52,7 +52,7 @@ contract InvoiceTest is Test {
             uint256 returnedTotal,
             uint256 returnedTax,
             uint256 returnedPaymentDocumentNumber
-        ) = invoice.getInvoice();
+        ) = invoice.getInvoice(0);
 
         assertEq(returnedPayer, payable(address(0x1)));
         assertEq(returnedPayee, payable(address(0x2)));
@@ -67,5 +67,31 @@ contract InvoiceTest is Test {
         assertEq(returnedTotal, 500);
         assertEq(returnedTax, 50);
         assertEq(returnedPaymentDocumentNumber, 67890);
+    }
+
+    function test_CheckInvoice() public {
+        assertEq(
+            invoice.checkInvoice(address(0x1), address(0x1)),
+            "It cannot be the buyer and the seller",
+            "Incorrect message for same payer and payee"
+        );
+
+        assertEq(
+            invoice.checkInvoice(address(0), address(0x2)),
+            "Need a Buyer",
+            "Incorrect message for missing buyer"
+        );
+
+        assertEq(
+            invoice.checkInvoice(address(0x1), address(0)),
+            "Need a Seller",
+            "Incorrect message for missing seller"
+        );
+
+        assertEq(
+            invoice.checkInvoice(address(0x1), address(0x2)),
+            "Verify",
+            "Incorrect message for valid invoice"
+        );
     }
 }

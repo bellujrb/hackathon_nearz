@@ -1,3 +1,7 @@
+node_modules
+dist
+.env
+
 # Compiler files
 cache/
 out/
@@ -13,5 +17,4 @@ docs/
 # Dotenv file
 .env
 
-node_modules/
-dist/
+artifacts/

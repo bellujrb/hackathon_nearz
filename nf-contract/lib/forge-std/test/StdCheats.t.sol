@@ -4,8 +4,6 @@ pragma solidity >=0.7.0 <0.9.0;
 import "../src/StdCheats.sol";
 import "../src/Test.sol";
 import "../src/StdJson.sol";
-import "../src/StdToml.sol";
-import "../src/interfaces/IERC20.sol";
 
 contract StdCheatsTest is Test {
     Bar test;
@@ -104,7 +102,7 @@ contract StdCheatsTest is Test {
         assertEq(address(this).balance, 1 ether);
     }
 
-    function test_DealToken() public {
+    function tes_tDealToken() public {
         Bar barToken = new Bar();
         address bar = address(barToken);
         deal(bar, address(this), 10000e18);
@@ -235,14 +233,14 @@ contract StdCheatsTest is Test {
         assertEq(privateKey, 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80);
     }
 
-    function test_BytesToUint() public pure {
+    function test_BytesToUint() public {
         assertEq(3, bytesToUint_test(hex"03"));
         assertEq(2, bytesToUint_test(hex"02"));
         assertEq(255, bytesToUint_test(hex"ff"));
         assertEq(29625, bytesToUint_test(hex"73b9"));
     }
 
-    function test_ParseJsonTxDetail() public view {
+    function test_ParseJsonTxDetail() public {
         string memory root = vm.projectRoot();
         string memory path = string.concat(root, "/test/fixtures/broadcast.log.json");
         string memory json = vm.readFile(path);
@@ -276,7 +274,7 @@ contract StdCheatsTest is Test {
         transactions;
     }
 
-    function test_ReadReceipt() public view {
+    function test_ReadReceipt() public {
         string memory root = vm.projectRoot();
         string memory path = string.concat(root, "/test/fixtures/broadcast.log.json");
         uint256 index = 5;
@@ -307,6 +305,9 @@ contract StdCheatsTest is Test {
         addInLoopNoGasNoGas();
         uint256 gas_used_double = gas_start_double - gasleft();
 
+        emit log_named_uint("Normal gas", gas_used_normal);
+        emit log_named_uint("Single modifier gas", gas_used_single);
+        emit log_named_uint("Double modifier  gas", gas_used_double);
         assertTrue(gas_used_double + gas_used_single < gas_used_normal);
     }
 
@@ -407,7 +408,7 @@ contract StdCheatsTest is Test {
         );
     }
 
-    function testFuzz_AssumeNotForgeAddress(address addr) external pure {
+    function testFuzz_AssumeNotForgeAddress(address addr) external {
         assumeNotForgeAddress(addr);
         assertTrue(
             addr != address(vm) && addr != 0x000000000000000000636F6e736F6c652e6c6f67
@@ -478,7 +479,7 @@ contract StdCheatsForkTest is Test {
         stdCheatsMock.exposed_assumeNotBlacklisted(eoa, address(0));
     }
 
-    function testFuzz_AssumeNotBlacklisted_TokenWithoutBlacklist(address addr) external view {
+    function testFuzz_AssumeNotBlacklisted_TokenWithoutBlacklist(address addr) external {
         assumeNotBlacklisted(SHIB, addr);
         assertTrue(true);
     }
@@ -490,7 +491,7 @@ contract StdCheatsForkTest is Test {
         stdCheatsMock.exposed_assumeNotBlacklisted(USDC, USDC_BLACKLISTED_USER);
     }
 
-    function testFuzz_AssumeNotBlacklisted_USDC(address addr) external view {
+    function testFuzz_AssumeNotBlacklisted_USDC(address addr) external {
         assumeNotBlacklisted(USDC, addr);
         assertFalse(USDCLike(USDC).isBlacklisted(addr));
     }
@@ -502,18 +503,9 @@ contract StdCheatsForkTest is Test {
         stdCheatsMock.exposed_assumeNotBlacklisted(USDT, USDT_BLACKLISTED_USER);
     }
 
-    function testFuzz_AssumeNotBlacklisted_USDT(address addr) external view {
+    function testFuzz_AssumeNotBlacklisted_USDT(address addr) external {
         assumeNotBlacklisted(USDT, addr);
         assertFalse(USDTLike(USDT).isBlackListed(addr));
-    }
-
-    function test_dealUSDC() external {
-        // roll fork to the point when USDC contract updated to store balance in packed slots
-        vm.rollFork(19279215);
-
-        uint256 balance = 100e6;
-        deal(USDC, address(this), balance);
-        assertEq(IERC20(USDC).balanceOf(address(this)), balance);
     }
 }
 

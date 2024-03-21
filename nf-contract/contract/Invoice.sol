@@ -15,7 +15,7 @@ contract Invoice {
         uint256 paymentDocumentNumber;
     }
 
-    InvoiceData public invoice;
+    InvoiceData[] public invoices;
 
     function setInvoiceData(
         address payable _payer,
@@ -35,21 +35,25 @@ contract Invoice {
             "Array lengths must match"
         );
 
-        invoice = InvoiceData({
-            payer: _payer,
-            payee: _payee,
-            invoiceNumber: _invoiceNumber,
-            invoiceDate: _invoiceDate,
-            itemDescriptions: _itemDescriptions,
-            quantities: _quantities,
-            unitPrices: _unitPrices,
-            total: _total,
-            tax: _tax,
-            paymentDocumentNumber: _paymentDocumentNumber
-        });
+        invoices.push(
+            InvoiceData({
+                payer: _payer,
+                payee: _payee,
+                invoiceNumber: _invoiceNumber,
+                invoiceDate: _invoiceDate,
+                itemDescriptions: _itemDescriptions,
+                quantities: _quantities,
+                unitPrices: _unitPrices,
+                total: _total,
+                tax: _tax,
+                paymentDocumentNumber: _paymentDocumentNumber
+            })
+        );
     }
 
-    function getInvoice()
+    function getInvoice(
+        uint256 index
+    )
         public
         view
         returns (
@@ -65,6 +69,9 @@ contract Invoice {
             uint256
         )
     {
+        require(index < invoices.length, "Index out of bounds");
+
+        InvoiceData memory invoice = invoices[index];
         return (
             invoice.payer,
             invoice.payee,
@@ -78,19 +85,32 @@ contract Invoice {
             invoice.paymentDocumentNumber
         );
     }
-    function checkInvoice() public view returns (string memory) {
+
+    function getAllInvoices() public view returns (InvoiceData[] memory) {
+        return invoices;
+    }
+
+    function checkInvoice(
+        address payer,
+        address payee
+    ) public pure returns (string memory) {
         string memory message = "";
 
-        if (invoice.payer == invoice.payee) {
+        if (payer == payee) {
             message = "It cannot be the buyer and the seller";
-        } else if (invoice.payer == address(0)) {
+            return message;
+        }
+        if (payer == address(0)) {
             message = "Need a Buyer";
-        } else if (invoice.payee == address(0)) {
-            message = "Need a Seller";
-        } else {
-            message = "Verify";
+            return message;
         }
 
+        if (payee == address(0)) {
+            message = "Need a Seller";
+            return message;
+        }
+
+        message = "Verify";
         return message;
     }
 }
